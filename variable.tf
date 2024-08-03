@@ -4,12 +4,6 @@ variable "environment" {
   default     = "poc"
 }
 
-variable "resource_group_name" {
-  description = "Resource group name"
-  type        = string
-  default     = "lara_rg"
-}
-
 variable "location" {
   description = "Loction where resources will be deployed"
   type        = string
