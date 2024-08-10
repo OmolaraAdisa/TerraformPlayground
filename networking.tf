@@ -175,6 +175,7 @@ resource "azurerm_network_security_rule" "app_subnet_nsg_rule_inbound" {
   resource_group_name         = azurerm_resource_group.demo_rg.name
   network_security_group_name = azurerm_network_security_group.app_subnet_nsg.name
 }
+
 # resource "azurerm_public_ip" "demo_ip" {
 #   name                = "${local.resource_name_prefix}-ip"
 #   resource_group_name = azurerm_resource_group.demo_rg.name

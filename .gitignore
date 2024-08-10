@@ -4,3 +4,7 @@
 # Terraform state file
 *terraform.tfstate
 *terraform.tfstate.backup
+
+# ssh keys
+*terraform-azure.pem
+*terraform-azure.pub
