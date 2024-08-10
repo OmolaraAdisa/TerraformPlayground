@@ -31,14 +31,12 @@ resource "azurerm_subnet" "web_subnet" {
   resource_group_name  = azurerm_resource_group.demo_rg.name
   virtual_network_name = azurerm_virtual_network.demo_vnet.name
   address_prefixes     = var.web_subnet_address
-
 }
 
 resource "azurerm_network_security_group" "web_subnet_nsg" {
   name                = "${local.resource_name_prefix}-web-subnet-nsg"
   location            = var.location
   resource_group_name = azurerm_resource_group.demo_rg.name
-
 }
 
 resource "azurerm_subnet_network_security_group_association" "web_subnet_nsg_assoc" {
@@ -76,7 +74,6 @@ resource "azurerm_network_security_group" "db_subnet_nsg" {
   name                = "${local.resource_name_prefix}-db-subnet-nsg"
   location            = var.location
   resource_group_name = azurerm_resource_group.demo_rg.name
-
 }
 
 resource "azurerm_subnet_network_security_group_association" "db_subnet_nsg_assoc" {
@@ -176,22 +173,22 @@ resource "azurerm_network_security_rule" "app_subnet_nsg_rule_inbound" {
   network_security_group_name = azurerm_network_security_group.app_subnet_nsg.name
 }
 
-# resource "azurerm_public_ip" "demo_ip" {
-#   name                = "${local.resource_name_prefix}-ip"
-#   resource_group_name = azurerm_resource_group.demo_rg.name
-#   location            = var.location
-#   allocation_method   = "Static"
-# }
+resource "azurerm_public_ip" "web_linuxvm_public_ip" {
+  name                = "${local.resource_name_prefix}-web-linux-publicip"
+  resource_group_name = azurerm_resource_group.demo_rg.name
+  location            = var.location
+  allocation_method   = "Static"
+}
 
-# resource "azurerm_network_interface" "demo_nic" {
-#   name                = "${local.resource_name_prefix}-nic"
-#   location            = var.location
-#   resource_group_name = azurerm_resource_group.demo_rg.name
+resource "azurerm_network_interface" "web_linuxvm_nic" {
+  name                = "${local.resource_name_prefix}-web-linux-vmnic"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.demo_rg.name
 
-#   ip_configuration {
-#     name                          = "lara_ip_conf"
-#     subnet_id                     = azurerm_subnet.web_subnet.id
-#     private_ip_address_allocation = "Dynamic"
-#     public_ip_address_id          = azurerm_public_ip.demo_ip.id
-#   }
-# }
+  ip_configuration {
+    name                          = "web-linux-vmip-conf"
+    subnet_id                     = azurerm_subnet.web_subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.web_linuxvm_public_ip.id
+  }
+}
