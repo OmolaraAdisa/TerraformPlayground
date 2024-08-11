@@ -2,7 +2,7 @@ resource "azurerm_linux_virtual_machine" "web_linuxvm" {
   name                  = "${local.resource_name_prefix}-web-linux-vm"
   resource_group_name   = azurerm_resource_group.demo_rg.name
   location              = var.location
-  size                  = "Standard_D1_v2"
+  size                  = "Standard_D2s_v3"
   admin_username        = "azureuser"
   network_interface_ids = [azurerm_network_interface.web_linuxvm_nic.id]
   admin_ssh_key {
@@ -16,9 +16,9 @@ resource "azurerm_linux_virtual_machine" "web_linuxvm" {
     storage_account_type = "Standard_LRS"
   }
   source_image_reference {
-    publisher = "RedHat"
-    offer     = "RHEL"
-    sku       = "9.3-gen1"
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
     version   = "latest"
-  }  
+  }
 }
