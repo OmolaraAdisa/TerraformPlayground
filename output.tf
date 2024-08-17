@@ -20,5 +20,5 @@ output "web_linuxvm_nic" {
 
 output "web_linuxvm_privateip" {
   description = "Web Linux virtual machine Network Private IP"
-  value = [azurerm_network_interface.web_linuxvm_nic.private_ip_address]
+  value = azurerm_network_interface.web_linuxvm_nic.private_ip_address
 }
