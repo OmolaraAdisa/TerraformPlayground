@@ -192,3 +192,24 @@ resource "azurerm_network_interface" "web_linuxvm_nic" {
     public_ip_address_id          = azurerm_public_ip.web_linuxvm_public_ip.id
   }
 }
+
+resource "azurerm_public_ip" "bastion_host_public_ip" {
+  name                = "${local.resource_name_prefix}-bastion-host-publicip"
+  resource_group_name = azurerm_resource_group.demo_rg.name
+  location            = var.location
+  allocation_method   = "Static"
+  sku = "Standard"
+}
+
+resource "azurerm_network_interface" "bastion_host_linuxvm_nic" {
+  name                = "${local.resource_name_prefix}-bastion-host-linux-vmnic"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.demo_rg.name
+
+  ip_configuration {
+    name                          = "bastion-vmip-conf"
+    subnet_id                     = azurerm_subnet.bastion_subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.bastion_host_public_ip.id
+  }
+}
