@@ -21,5 +21,5 @@ resource "azurerm_linux_virtual_machine" "web_linuxvm" {
     sku       = "22_04-lts"
     version   = "latest"
   }
-  custom_data = filebase64("${path.module}/app-scripts/startup-script.sh")
+#   custom_data = filebase64("${path.module}/app-scripts/startup-script.sh")
 }
