@@ -10,15 +10,15 @@ output "virtual_network_id" {
 
 output "web_linuxvm_public_ip" {
   description = "Web Linux virtual machine public ip"
-  value = azurerm_public_ip.web_linuxvm_public_ip.ip_address
+  value       = azurerm_public_ip.web_linuxvm_public_ip.ip_address
 }
 
 output "web_linuxvm_nic" {
   description = "Web Linux virtual machine Network Interface Card"
-  value = azurerm_network_interface.web_linuxvm_nic.id
+  value       = azurerm_network_interface.web_linuxvm_nic.id
 }
 
 output "web_linuxvm_privateip" {
   description = "Web Linux virtual machine Network Private IP"
-  value = azurerm_network_interface.web_linuxvm_nic.private_ip_address
+  value       = azurerm_network_interface.web_linuxvm_nic.private_ip_address
 }
